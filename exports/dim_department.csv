@@ -1,0 +1,6 @@
+department_id,department_name,cost_center
+1,"Sales & Marketing",CC-100
+2,"Research & Development",CC-200
+3,"General & Administrative",CC-300
+4,"Operations & Logistics",CC-400
+5,"Customer Support",CC-500

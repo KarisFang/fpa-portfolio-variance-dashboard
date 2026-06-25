@@ -1,0 +1,61 @@
+department_name,month,budget,actual
+"Customer Support",1,70500.0,63450.0
+"Customer Support",2,71000.0,63900.0
+"Customer Support",3,71500.0,64350.0
+"Customer Support",4,72000.0,64800.0
+"Customer Support",5,72500.0,65250.0
+"Customer Support",6,73000.0,65700.0
+"Customer Support",7,73500.0,66150.0
+"Customer Support",8,74000.0,66600.0
+"Customer Support",9,74500.0,67050.0
+"Customer Support",10,75000.0,67500.0
+"Customer Support",11,75500.0,67950.0
+"Customer Support",12,76000.0,68400.0
+"General & Administrative",1,90000.0,91620.0
+"General & Administrative",2,90000.0,93240.0
+"General & Administrative",3,90000.0,94860.0
+"General & Administrative",4,90000.0,96480.0
+"General & Administrative",5,90000.0,98100.0
+"General & Administrative",6,90000.0,99720.0
+"General & Administrative",7,90000.0,101340.0
+"General & Administrative",8,90000.0,102960.0
+"General & Administrative",9,90000.0,104580.0
+"General & Administrative",10,90000.0,106200.0
+"General & Administrative",11,90000.0,107820.0
+"General & Administrative",12,90000.0,109440.0
+"Operations & Logistics",1,126800.0,119192.0
+"Operations & Logistics",2,128600.0,120884.0
+"Operations & Logistics",3,130400.0,122576.0
+"Operations & Logistics",4,132200.0,124268.0
+"Operations & Logistics",5,134000.0,125960.0
+"Operations & Logistics",6,135800.0,127652.0
+"Operations & Logistics",7,137600.0,129344.0
+"Operations & Logistics",8,139400.0,131036.0
+"Operations & Logistics",9,141200.0,132728.0
+"Operations & Logistics",10,158000.0,170640.0
+"Operations & Logistics",11,159800.0,204544.0
+"Operations & Logistics",12,161600.0,206848.0
+"Research & Development",1,120800.0,121283.2
+"Research & Development",2,121600.0,119776.0
+"Research & Development",3,122400.0,122889.6
+"Research & Development",4,123200.0,121352.0
+"Research & Development",5,124000.0,127348.0
+"Research & Development",6,124800.0,124924.8
+"Research & Development",7,125600.0,126102.4
+"Research & Development",8,126400.0,124377.6
+"Research & Development",9,127200.0,126436.8
+"Research & Development",10,128000.0,127360.0
+"Research & Development",11,128800.0,126996.8
+"Research & Development",12,129600.0,127396.8
+"Sales & Marketing",1,174500.0,177117.5
+"Sales & Marketing",2,179000.0,181685.0
+"Sales & Marketing",3,183500.0,186252.5
+"Sales & Marketing",4,188000.0,190820.0
+"Sales & Marketing",5,192500.0,195387.5
+"Sales & Marketing",6,197000.0,199955.0
+"Sales & Marketing",7,201500.0,204522.5
+"Sales & Marketing",8,206000.0,209090.0
+"Sales & Marketing",9,210500.0,213657.5
+"Sales & Marketing",10,240000.0,268800.0
+"Sales & Marketing",11,244500.0,322740.0
+"Sales & Marketing",12,249000.0,328680.0

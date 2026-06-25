@@ -1,0 +1,6 @@
+department_name,cost_center,budget,actual
+"Customer Support",CC-500,879000.0,791100.0
+"General & Administrative",CC-300,1080000.0,1206360.0
+"Operations & Logistics",CC-400,1685400.0,1715672.0
+"Research & Development",CC-200,1502400.0,1496244.0
+"Sales & Marketing",CC-100,2466000.0,2678707.5

@@ -1,0 +1,63 @@
+<svg viewBox="0 0 1000 460" xmlns="http://www.w3.org/2000/svg" font-family="Calibri, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#1F4E78"/>
+    </marker>
+  </defs>
+  <rect width="1000" height="460" fill="#FFFFFF"/>
+
+  <text x="500" y="32" text-anchor="middle" font-size="20" font-weight="bold" fill="#1F4E78">Budget vs. Actual Variance Dashboard — Architecture</text>
+
+  <!-- Inputs row -->
+  <rect x="30" y="70" width="220" height="80" rx="8" fill="#1F4E78"/>
+  <text x="140" y="98" text-anchor="middle" font-size="13" font-weight="bold" fill="#FFFFFF">FY2025 Revenue Plan</text>
+  <text x="140" y="116" text-anchor="middle" font-size="11" fill="#D9E1F2">budget_revenue (SQL)</text>
+  <text x="140" y="132" text-anchor="middle" font-size="11" fill="#D9E1F2">FY24 actual x +10% by region</text>
+
+  <rect x="280" y="70" width="220" height="80" rx="8" fill="#1F4E78"/>
+  <text x="390" y="98" text-anchor="middle" font-size="13" font-weight="bold" fill="#FFFFFF">FY2025 Revenue Actual</text>
+  <text x="390" y="116" text-anchor="middle" font-size="11" fill="#D9E1F2">fact_sales (from Project 2)</text>
+  <text x="390" y="132" text-anchor="middle" font-size="11" fill="#D9E1F2">Same SQLite database</text>
+
+  <rect x="530" y="70" width="210" height="80" rx="8" fill="#1F4E78"/>
+  <text x="635" y="98" text-anchor="middle" font-size="13" font-weight="bold" fill="#FFFFFF">FY2025 OpEx Budget</text>
+  <text x="635" y="116" text-anchor="middle" font-size="11" fill="#D9E1F2">budget_opex (SQL, 5 depts)</text>
+  <text x="635" y="132" text-anchor="middle" font-size="11" fill="#D9E1F2">Set at start of year</text>
+
+  <rect x="770" y="70" width="200" height="80" rx="8" fill="#1F4E78"/>
+  <text x="870" y="98" text-anchor="middle" font-size="13" font-weight="bold" fill="#FFFFFF">FY2025 OpEx Actual</text>
+  <text x="870" y="116" text-anchor="middle" font-size="11" fill="#D9E1F2">actual_opex (SQL, 5 depts)</text>
+  <text x="870" y="132" text-anchor="middle" font-size="11" fill="#D9E1F2">Booked monthly</text>
+
+  <!-- Arrows down to variance engine -->
+  <line x1="140" y1="150" x2="140" y2="190" stroke="#1F4E78" stroke-width="2"/>
+  <line x1="390" y1="150" x2="390" y2="190" stroke="#1F4E78" stroke-width="2"/>
+  <line x1="635" y1="150" x2="635" y2="190" stroke="#1F4E78" stroke-width="2"/>
+  <line x1="870" y1="150" x2="870" y2="190" stroke="#1F4E78" stroke-width="2"/>
+  <line x1="140" y1="190" x2="870" y2="190" stroke="#1F4E78" stroke-width="2"/>
+  <line x1="500" y1="190" x2="500" y2="210" stroke="#1F4E78" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Variance engine -->
+  <rect x="280" y="220" width="440" height="80" rx="8" fill="#2E75B6"/>
+  <text x="500" y="248" text-anchor="middle" font-size="14" font-weight="bold" fill="#FFFFFF">SQL Variance Engine</text>
+  <text x="500" y="266" text-anchor="middle" font-size="11" fill="#DEEBF7">variance_queries.sql — pre-aggregate each side in a CTE,</text>
+  <text x="500" y="282" text-anchor="middle" font-size="11" fill="#DEEBF7">then join (avoids the fan-out bug) + automatic exception flagging</text>
+
+  <!-- Arrow down to outputs -->
+  <line x1="500" y1="300" x2="500" y2="330" stroke="#1F4E78" stroke-width="2"/>
+  <line x1="220" y1="330" x2="780" y2="330" stroke="#1F4E78" stroke-width="2"/>
+  <line x1="220" y1="330" x2="220" y2="350" stroke="#1F4E78" stroke-width="2" marker-end="url(#arrow)"/>
+  <line x1="780" y1="330" x2="780" y2="350" stroke="#1F4E78" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Excel output -->
+  <rect x="80" y="360" width="280" height="80" rx="8" fill="#21A366"/>
+  <text x="220" y="388" text-anchor="middle" font-size="14" font-weight="bold" fill="#FFFFFF">Excel Variance Dashboard</text>
+  <text x="220" y="406" text-anchor="middle" font-size="11" fill="#E2F0D9">KPI cards + charts + conditional</text>
+  <text x="220" y="422" text-anchor="middle" font-size="11" fill="#E2F0D9">formatting (color scales + flag rules)</text>
+
+  <!-- Power BI output -->
+  <rect x="640" y="360" width="280" height="80" rx="8" fill="#F2C811"/>
+  <text x="780" y="388" text-anchor="middle" font-size="14" font-weight="bold" fill="#3B3B3B">Power BI Variance Dashboard</text>
+  <text x="780" y="406" text-anchor="middle" font-size="11" fill="#3B3B3B">DAX variance measures + drill-through</text>
+  <text x="780" y="422" text-anchor="middle" font-size="11" fill="#3B3B3B">+ conditional formatting by rules</text>
+</svg>
