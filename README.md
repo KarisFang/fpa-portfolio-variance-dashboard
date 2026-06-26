@@ -15,6 +15,12 @@ account or download needed, just a browser. The two heatmap grids (region × mon
 exact same red/yellow/green logic as the Excel conditional formatting, just rendered natively in HTML/CSS.
 Hosted free on GitHub Pages from `docs/index.html`.
 
+**A note on Power BI:** same situation as Project 2 — built on a MacBook, no Windows machine, no work/school
+email for the free Power BI tenant, limited space to run one through a VM. `powerbi/POWER_BI_BUILD_GUIDE.md`
+documents my actual thought process instead: the data model, every DAX measure, and the drill-through report
+layout, written precisely enough to execute the moment I have Windows access. The HTML dashboard above is
+what replaces it for now.
+
 ## The headline finding
 
 The FY2025 plan assumed a uniform **+10% revenue growth** across every region. It didn't play out that way:

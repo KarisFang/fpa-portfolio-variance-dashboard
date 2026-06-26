@@ -1,7 +1,12 @@
 # Power BI Build Guide — Budget vs. Actual Variance Dashboard
 
-Same approach as Project 2: this is a precise, copy-pasteable blueprint rather than a `.pbix` file, since
-Power BI Desktop doesn't run in this build environment.
+**Same situation as Project 2:** I built this portfolio on a MacBook — Power BI Desktop is Windows-only, I
+don't have a work/school email for the free Power BI tenant signup, and a Windows VM is constrained by
+limited disk space on this machine. So instead of a `.pbix` file or a published dashboard, this is the exact
+thought process and steps I'd execute the moment I have Windows access: the data model, every DAX measure,
+and the report layout (including the drill-through setup), written precisely enough to reproduce the same
+working dashboard in about 15 minutes. The HTML dashboard with the conditional-formatting heatmaps is what
+stands in for it for now.
 
 ## 1. Import the data
 
