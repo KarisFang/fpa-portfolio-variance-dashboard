@@ -75,4 +75,4 @@ python3 build_variance_dashboard.py   # only Python use: writing the .xlsx file,
 ```
 
 ---
-Built by Karis Fang as a portfolio project for FP&A roles.
+Built by Karis Fang as a portfolio project. 
