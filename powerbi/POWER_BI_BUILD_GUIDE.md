@@ -83,6 +83,13 @@ On the **Region_Variance** and **Department_Variance** matrix/table visuals:
 | Trend | Line chart | Axis: month; Values: `[Budget Revenue]` vs `[Actual Revenue]` |
 | Drill-through detail pages | Matrix | Month-level detail, one page per dimension (see Section 5) |
 
+## 7. Publish & share (the plan, once I have Windows access)
+
+**File → Publish → Power BI Service** (free workspace is fine). Once published, I'd:
+- Use **File → Embed report → Publish to web** (the data is synthetic and non-sensitive, so this is safe here)
+  to get a public link for this portfolio/resume.
+- Or, failing that, just share the workspace link directly — recruiters with a free Power BI account could open it.
+
 ## A note on threshold noise (worth raising in an interview)
 
 At the **region x month** grain, several cells show >100% variance — not because anything is actually wrong,
