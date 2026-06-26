@@ -90,7 +90,7 @@ On the **Region_Variance** and **Department_Variance** matrix/table visuals:
   to get a public link for this portfolio/resume.
 - Or, failing that, just share the workspace link directly — recruiters with a free Power BI account could open it.
 
-## A note on threshold noise (worth raising in an interview)
+## A note on threshold noise
 
 At the **region x month** grain, several cells show >100% variance — not because anything is actually wrong,
 but because some region/month combinations have a small transaction count, so a handful of large wholesale
