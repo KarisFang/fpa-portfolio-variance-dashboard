@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Meridian Retail Co. — FY2025 Budget vs. Actual Variance Review</title>
+<title>Meridian Retail Co. — Budget vs. Actual Variance Review (FY2025)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.5.0/chart.umd.min.js"
-  onerror="this.onerror=null;var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js';s.onload=function(){if(window.renderOverviewCharts)window.renderOverviewCharts();};document.head.appendChild(s);"></script>
+  onerror="this.onerror=null;var s=document.createElement('script');s.src='https://cdn.jsdelivr.net/npm/chart.js@4.5.0/dist/chart.umd.min.js';s.onload=function(){if(window.renderMeridianCharts)window.renderMeridianCharts();};document.head.appendChild(s);"></script>
 <style>
   :root{
     --bg:#0E1525;
@@ -21,79 +21,79 @@
     --text-muted:#8C93A8;
     --negative:#E0645A;
     --positive:#6FBF8B;
-    --neutral:#D6C24C;
+    --heat-red:#F8696B;
+    --heat-yellow:#FFEB84;
+    --heat-green:#63BE7B;
   }
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
   body{margin:0;background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;line-height:1.5;}
   a{color:var(--gold);}
-  a:focus-visible, button:focus-visible, tr:focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
+  a:focus-visible, button:focus-visible{outline:2px solid var(--gold); outline-offset:3px;}
 
   .meridian-bg{position:relative;overflow:hidden;border-bottom:1px solid var(--hairline);}
-  .meridian-bg svg{position:absolute;top:-40%; left:50%;transform:translateX(-50%);width:1400px;max-width:none;opacity:0.16;pointer-events:none;}
+  .meridian-bg svg{position:absolute;top:-40%;left:50%;transform:translateX(-50%);width:1400px;max-width:none;opacity:0.16;pointer-events:none;}
   header.hero{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:48px 28px 36px;}
   .eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:8px;margin-bottom:14px;}
-  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--negative);box-shadow:0 0 0 3px rgba(224,100,90,0.18);}
-  h1{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(28px,4vw,42px);margin:0 0 6px;letter-spacing:-0.01em;}
+  .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--positive);box-shadow:0 0 0 3px rgba(111,191,139,0.18);}
+  h1{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(26px,4vw,40px);margin:0 0 6px;letter-spacing:-0.01em;}
   .hero p.sub{color:var(--text-muted);font-size:15px;max-width:600px;margin:0;}
   .hero-links{margin-top:22px;display:flex;gap:18px;flex-wrap:wrap;font-family:'JetBrains Mono',monospace;font-size:12.5px;}
   .hero-links a{color:var(--text-muted);text-decoration:none;border-bottom:1px solid transparent;padding-bottom:2px;}
-  .hero-links a:hover{color:var(--gold); border-bottom-color:var(--gold);}
+  .hero-links a:hover{color:var(--gold);border-bottom-color:var(--gold);}
 
   main{max-width:1180px;margin:0 auto;padding:36px 28px 64px;}
-  section{margin-bottom:46px;}
+  section{margin-bottom:42px;}
   .section-label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-muted);margin:0 0 14px;display:flex;align-items:center;gap:10px;}
   .section-label::after{content:"";flex:1;height:1px;background:var(--hairline);}
 
   .kpi-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;}
   @media (max-width:900px){.kpi-grid{grid-template-columns:repeat(2,1fr);}}
   .kpi-card{background:var(--surface);border:1px solid var(--hairline);border-left:3px solid var(--gold);border-radius:6px;padding:16px 16px 14px;}
-  .kpi-card.alert{border-left-color:var(--negative);}
   .kpi-label{font-size:11.5px;color:var(--text-muted);margin-bottom:8px;}
   .kpi-value{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:22px;letter-spacing:-0.01em;font-variant-numeric:tabular-nums;}
   .kpi-value.neg{color:var(--negative);}
   .kpi-value.pos{color:var(--positive);}
 
-  .insight-banner{background:linear-gradient(90deg, rgba(224,100,90,0.10), rgba(224,100,90,0.02));border:1px solid var(--hairline);border-left:3px solid var(--negative);border-radius:6px;padding:18px 22px;display:flex;gap:14px;align-items:flex-start;}
-  .insight-banner .flag{font-family:'JetBrains Mono',monospace;color:var(--negative);font-size:13px;font-weight:600;white-space:nowrap;padding-top:1px;}
+  .insight-banner{background:linear-gradient(90deg, rgba(214,162,76,0.10), rgba(214,162,76,0.02));border:1px solid var(--hairline);border-left:3px solid var(--gold);border-radius:6px;padding:18px 22px;display:flex;gap:14px;align-items:flex-start;margin-bottom:14px;}
+  .insight-banner .flag{font-family:'JetBrains Mono',monospace;color:var(--gold);font-size:13px;font-weight:600;white-space:nowrap;padding-top:1px;}
   .insight-banner p{margin:0;font-size:14px;color:var(--text);}
   .insight-banner b{color:var(--gold);font-family:'JetBrains Mono',monospace;font-weight:600;}
-  .insight-banner .neg-strong{color:var(--negative);font-family:'JetBrains Mono',monospace;font-weight:600;}
-  .insight-banner .pos-strong{color:var(--positive);font-family:'JetBrains Mono',monospace;font-weight:600;}
+  .neg-strong{color:var(--negative);font-family:'JetBrains Mono',monospace;font-weight:600;}
+  .pos-strong{color:var(--positive);font-family:'JetBrains Mono',monospace;font-weight:600;}
 
-  .panel{background:var(--surface);border:1px solid var(--hairline);border-radius:8px;padding:18px 18px 8px;margin-bottom:16px;}
+  .chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  @media (max-width:900px){.chart-grid{grid-template-columns:1fr;}}
+  .panel{background:var(--surface);border:1px solid var(--hairline);border-radius:8px;padding:18px 18px 8px;}
   .panel h3{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;margin:0 0 2px;}
   .panel .panel-sub{font-size:12px;color:var(--text-muted);margin:0 0 10px;}
   .chart-wrap{position:relative;height:260px;}
-  .chart-wrap.small{height:180px;}
 
-  table{width:100%;border-collapse:collapse;font-size:13.5px;}
-  th{text-align:left;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);padding:9px 10px;border-bottom:1px solid var(--hairline);}
-  td{padding:10px 10px;border-bottom:1px solid var(--hairline);font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;}
-  td.name-cell{font-family:'Inter',sans-serif;font-weight:500;}
-  tr.clickable-row{cursor:pointer;transition:background 0.15s;}
-  tr.clickable-row:hover{background:var(--surface-2);}
-  tr.clickable-row td:first-child{display:flex;align-items:center;gap:8px;}
-  .chevron{display:inline-block;width:8px;height:8px;border-right:1.5px solid var(--text-muted);border-bottom:1.5px solid var(--text-muted);transform:rotate(-45deg);transition:transform 0.2s;flex-shrink:0;}
-  tr.expanded .chevron{transform:rotate(45deg);}
+  .heatmap-scroll{overflow-x:auto;}
+  table.heatmap{width:100%;border-collapse:collapse;font-size:11.5px;min-width:760px;}
+  table.heatmap th{text-align:center;font-family:'JetBrains Mono',monospace;font-size:9.5px;letter-spacing:0.04em;text-transform:uppercase;color:var(--text-muted);padding:7px 4px;border-bottom:1px solid var(--hairline);}
+  table.heatmap th.row-label-head{text-align:left;}
+  table.heatmap td{padding:7px 4px;text-align:center;font-family:'JetBrains Mono',monospace;font-weight:600;color:#0E1525;}
+  table.heatmap td.row-label{text-align:left;color:var(--text);font-family:'Inter',sans-serif;font-weight:500;background:transparent !important;padding-right:10px;white-space:nowrap;}
+  table.heatmap tr:hover td.row-label{color:var(--gold);}
+  .legend{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--text-muted);margin:10px 2px 4px;}
+  .legend .swatch{width:14px;height:10px;border-radius:2px;display:inline-block;}
+  .legend-scale{display:flex;height:10px;width:140px;border-radius:2px;overflow:hidden;}
+  .legend-scale span{flex:1;height:100%;}
+
+  table.plain{width:100%;border-collapse:collapse;font-size:13.5px;}
+  table.plain th{text-align:left;font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-muted);padding:9px 10px;border-bottom:1px solid var(--hairline);}
+  table.plain td{padding:9px 10px;border-bottom:1px solid var(--hairline);font-family:'JetBrains Mono',monospace;font-variant-numeric:tabular-nums;}
+  table.plain td.name-cell{font-family:'Inter',sans-serif;}
+  table.plain tr:last-child td{border-bottom:none;}
   .num{text-align:right;}
-  .variance-badge{display:inline-block;padding:3px 9px;border-radius:4px;font-weight:600;font-size:12.5px;min-width:64px;text-align:center;}
-  .drill-row{display:none;}
-  .drill-row.show{display:table-row;}
-  .drill-row td{padding:0;border-bottom:1px solid var(--hairline);}
-  .drill-content{padding:18px 18px 18px 38px;background:var(--surface-2);}
-  .drill-content .mini-table{margin-top:10px;}
-  .drill-content .mini-table th, .drill-content .mini-table td{padding:6px 8px;font-size:12px;}
-  @media (prefers-reduced-motion: reduce){
-    html{scroll-behavior:auto;}
-    .chevron{transition:none;}
-  }
 
   footer{border-top:1px solid var(--hairline);padding:28px 28px 40px;max-width:1180px;margin:0 auto;}
   footer p{color:var(--text-muted);font-size:12.5px;margin:0 0 10px;}
   footer .repo-links{display:flex;gap:20px;flex-wrap:wrap;font-family:'JetBrains Mono',monospace;font-size:12px;}
   footer .repo-links a{text-decoration:none;}
-  .hint{font-size:11.5px;color:var(--text-muted);margin:0 0 10px;font-style:italic;}
+
+  @media (prefers-reduced-motion: reduce){html{scroll-behavior:auto;}}
 </style>
 </head>
 <body>
@@ -109,9 +109,7 @@
   <header class="hero">
     <div class="eyebrow"><span class="dot"></span> FP&amp;A PORTFOLIO PROJECT 3 &middot; LIVE DATA SHOWCASE</div>
     <h1>Budget vs. Actual Variance Review</h1>
-    <p class="sub">Meridian Retail Co., FY2025. Click any row to drill into its monthly detail &mdash; the same
-    region/department-level analysis the Power BI build guide sets up as a drill-through page, here as a
-    live click-to-expand instead.</p>
+    <p class="sub">Meridian Retail Co., FY2025 &mdash; same company and SQL pipeline as Project 2, viewed through a budget lens. Every cell below is colored by an actual computed variance %, the same way the Excel conditional formatting works.</p>
     <div class="hero-links">
       <a href="https://github.com/KarisFang/fpa-portfolio-variance-dashboard" target="_blank" rel="noopener">View the repo →</a>
       <a href="https://github.com/KarisFang/fpa-portfolio-variance-dashboard/blob/main/sql/variance_queries.sql" target="_blank" rel="noopener">SQL queries</a>
@@ -126,69 +124,83 @@
   <section aria-label="Key variance metrics">
     <div class="section-label">FY2025 variance at a glance</div>
     <div class="kpi-grid">
-      <div class="kpi-card alert">
-        <div class="kpi-label">Revenue Variance $</div>
-        <div class="kpi-value neg">&minus;$2.10M</div>
-      </div>
-      <div class="kpi-card alert">
-        <div class="kpi-label">Revenue Variance %</div>
-        <div class="kpi-value neg">&minus;10.1%</div>
-      </div>
-      <div class="kpi-card alert">
-        <div class="kpi-label">OpEx Overspend $</div>
-        <div class="kpi-value neg">+$275K</div>
-      </div>
-      <div class="kpi-card alert">
-        <div class="kpi-label">OpEx Overspend %</div>
-        <div class="kpi-value neg">+3.6%</div>
-      </div>
-      <div class="kpi-card">
-        <div class="kpi-label">Flagged Exceptions</div>
-        <div class="kpi-value">85</div>
-      </div>
+      <div class="kpi-card"><div class="kpi-label">Revenue Variance $</div><div class="kpi-value neg">&minus;$2.10M</div></div>
+      <div class="kpi-card"><div class="kpi-label">Revenue Variance %</div><div class="kpi-value neg">&minus;10.1%</div></div>
+      <div class="kpi-card"><div class="kpi-label">OpEx Variance $ (Unfavorable)</div><div class="kpi-value neg">+$0.28M</div></div>
+      <div class="kpi-card"><div class="kpi-label">OpEx Variance %</div><div class="kpi-value neg">+3.6%</div></div>
+      <div class="kpi-card"><div class="kpi-label">Flagged Exceptions</div><div class="kpi-value">85<span style="font-size:12px;color:var(--text-muted);"> / 180</span></div></div>
     </div>
   </section>
 
-  <section aria-label="Headline insight">
+  <section aria-label="Headline insights">
     <div class="insight-banner">
       <div class="flag">▸ FLAGGED</div>
       <p>The FY2025 plan assumed a uniform <b>+10%</b> revenue lift across every region. <b>Greater Asia</b> missed
-      it by <span class="neg-strong">&minus;43.5%</span> while <b>North America</b> beat it by
-      <span class="pos-strong">+12.6%</span> &mdash; one region's miss erased most of the company's outperformance
-      elsewhere. On the cost side, <b>General &amp; Administrative</b> overspend never exceeded ~2% in any single
-      month, but compounded to <span class="neg-strong">+11.7%</span> by year-end &mdash; invisible to a
-      monthly-only check, obvious in a YTD view.</p>
+      that plan by <span class="neg-strong">&minus;43.5%</span> while <b>North America</b> beat it by
+      <span class="pos-strong">+12.6%</span>. One region's miss erased almost all of the company's outperformance
+      elsewhere &mdash; a flat company-wide variance number would have hidden this completely.</p>
+    </div>
+    <div class="insight-banner">
+      <div class="flag">▸ FLAGGED</div>
+      <p><b>General &amp; Administrative</b> overspend never exceeded <span class="neg-strong">~2%</span> in any
+      single month, but crept up every month, compounding to <span class="neg-strong">+11.7%</span> by year-end.
+      Invisible to a monthly threshold check &mdash; obvious in a YTD view. This is the slow-creep variance pattern
+      a monthly (not just annual) review exists to catch.</p>
     </div>
   </section>
 
-  <section aria-label="Revenue variance by region">
-    <div class="section-label">Revenue variance by region</div>
-    <div class="panel">
-      <h3>Budget vs. Actual — FY2025</h3>
-      <p class="panel-sub">Plan: FY2024 actual x a flat +10% applied uniformly to every region</p>
-      <div class="chart-wrap"><canvas id="regionOverviewChart"></canvas></div>
-    </div>
-    <div class="panel">
-      <p class="hint">Click a region to see its monthly budget vs. actual breakdown</p>
-      <table>
-        <thead><tr><th>Region</th><th class="num">Budget</th><th class="num">Actual</th><th class="num">Variance $</th><th>Variance %</th></tr></thead>
-        <tbody id="regionTableBody"></tbody>
-      </table>
+  <section aria-label="Annual budget vs actual by region and department">
+    <div class="section-label">Annual budget vs. actual</div>
+    <div class="chart-grid">
+      <div class="panel">
+        <h3>Revenue: Budget vs. Actual by Region</h3>
+        <p class="panel-sub">FY2025 full year</p>
+        <div class="chart-wrap"><canvas id="regionChart"></canvas></div>
+      </div>
+      <div class="panel">
+        <h3>OpEx: Budget vs. Actual by Department</h3>
+        <p class="panel-sub">FY2025 full year</p>
+        <div class="chart-wrap"><canvas id="deptChart"></canvas></div>
+      </div>
     </div>
   </section>
 
-  <section aria-label="OpEx variance by department">
-    <div class="section-label">OpEx variance by department</div>
+  <section aria-label="Revenue variance heatmap by region and month">
+    <div class="section-label">Revenue variance % — region × month (conditional formatting)</div>
     <div class="panel">
-      <h3>Budget vs. Actual — FY2025</h3>
-      <p class="panel-sub">Positive variance % = overspend vs. budget (unfavorable)</p>
-      <div class="chart-wrap"><canvas id="deptOverviewChart"></canvas></div>
+      <p class="panel-sub">Same logic as the Excel ColorScaleRule: red = furthest under plan, green = furthest over plan.</p>
+      <div class="heatmap-scroll">
+        <table class="heatmap" id="regionHeatmap"></table>
+      </div>
+      <div class="legend">
+        <span>&minus;50%</span>
+        <span class="legend-scale"><span style="background:#F8696B;"></span><span style="background:#FBC18A;"></span><span style="background:#FFEB84;"></span><span style="background:#A4D79C;"></span><span style="background:#63BE7B;"></span></span>
+        <span>+50%</span>
+      </div>
     </div>
+  </section>
+
+  <section aria-label="OpEx variance heatmap by department and month">
+    <div class="section-label">OpEx variance % — department × month (conditional formatting, reversed scale)</div>
     <div class="panel">
-      <p class="hint">Click a department to see its monthly budget vs. actual breakdown</p>
-      <table>
-        <thead><tr><th>Department</th><th class="num">Budget</th><th class="num">Actual</th><th class="num">Variance $</th><th>Variance %</th></tr></thead>
-        <tbody id="deptTableBody"></tbody>
+      <p class="panel-sub">Reversed vs. revenue: for costs, green = under budget (good), red = over budget (bad).</p>
+      <div class="heatmap-scroll">
+        <table class="heatmap" id="deptHeatmap"></table>
+      </div>
+      <div class="legend">
+        <span>&minus;30%</span>
+        <span class="legend-scale"><span style="background:#63BE7B;"></span><span style="background:#A4D79C;"></span><span style="background:#FFEB84;"></span><span style="background:#FBC18A;"></span><span style="background:#F8696B;"></span></span>
+        <span>+30%</span>
+      </div>
+    </div>
+  </section>
+
+  <section aria-label="Exceptions table">
+    <div class="section-label">Top 10 flagged exceptions by severity</div>
+    <div class="panel">
+      <table class="plain">
+        <thead><tr><th>Area</th><th>Unit</th><th>Month</th><th class="num">Variance %</th></tr></thead>
+        <tbody id="exceptionsBody"></tbody>
       </table>
     </div>
   </section>
@@ -196,203 +208,188 @@
 </main>
 
 <footer>
-  <p>Same synthetic "Meridian Retail Co." dataset as Project 2, extended with a budget plan (revenue by region)
-  and a 5-department OpEx budget/actual. Full methodology &mdash; including a real SQL fan-out bug hit and fixed
-  during development &mdash; is documented in the repo.</p>
+  <p>Same synthetic "Meridian Retail Co." dataset as Project 2, extended with an FY2025 budget (revenue plan by
+  region, OpEx plan by department). Full methodology &mdash; including a real SQL fan-out bug hit and fixed along
+  the way &mdash; is documented in the repo.</p>
   <div class="repo-links">
     <a href="https://github.com/KarisFang/fpa-portfolio-variance-dashboard">github.com/KarisFang/fpa-portfolio-variance-dashboard</a>
   </div>
 </footer>
 
 <script>
-const fmtUSD = n => (n < 0 ? "-$" : "$") + Math.round(Math.abs(n)).toLocaleString("en-US");
-const fmtUSDShort = n => "$" + (n/1e6).toFixed(2) + "M";
-const fmtPct = n => (n>=0?"+":"") + (n*100).toFixed(1) + "%";
-
-// ---- Region data: annual + monthly ----
 const regionAnnual = [
-  ["North America", 6301924.00, 7094729.45],
-  ["Latin America", 1201255.77, 1408055.23],
-  ["APAC", 2750450.03, 2573786.81],
-  ["Europe", 5090424.43, 4548997.25],
-  ["Greater Asia", 5480465.24, 3096550.13]
+  ["North America",6301924,7094729],
+  ["Europe",5090424,4548997],
+  ["Greater Asia",5480465,3096550],
+  ["APAC",2750450,2573787],
+  ["Latin America",1201256,1408055]
 ];
-const regionMonthly = {
-  "North America": [[1,254236.65,384673.75],[2,227361.27,385228.92],[3,621978.60,508444.98],[4,584210.31,566672.65],[5,431598.48,474567.29],[6,441898.45,464868.52],[7,606911.25,549183.84],[8,499864.74,451719.39],[9,443032.70,497851.92],[10,631088.05,797950.96],[11,707319.05,790688.09],[12,852424.45,1222879.14]],
-  "Latin America": [[1,37695.82,122476.41],[2,38132.13,115723.22],[3,118645.91,92926.12],[4,97969.23,41995.60],[5,100831.98,70150.11],[6,87668.67,55029.58],[7,113782.16,160982.38],[8,44116.53,186187.91],[9,90358.98,88583.47],[10,123634.36,107860.55],[11,217403.54,172517.14],[12,131016.46,193622.74]],
-  "APAC": [[1,261292.94,293073.61],[2,107863.45,192400.57],[3,184974.34,164869.57],[4,306779.32,88496.75],[5,205260.92,245857.41],[6,183481.97,176163.74],[7,240193.54,150713.95],[8,158139.84,134207.61],[9,191172.20,250566.97],[10,274540.73,219938.82],[11,281396.10,309874.44],[12,355354.68,347623.37]],
-  "Europe": [[1,288941.58,340783.63],[2,146509.36,346520.62],[3,346415.39,187050.33],[4,338987.79,323004.14],[5,561876.38,392062.95],[6,550678.28,180549.10],[7,549557.24,318939.19],[8,399133.06,395572.37],[9,399305.76,321322.92],[10,290936.78,399824.89],[11,667163.59,633655.32],[12,550919.22,709711.79]],
-  "Greater Asia": [[1,262269.46,122560.00],[2,413053.14,133485.40],[3,381272.16,118718.25],[4,459788.65,344550.57],[5,470872.38,263765.43],[6,193907.62,397446.83],[7,432697.75,194073.49],[8,377297.43,252584.05],[9,641355.04,211367.01],[10,425748.23,403278.47],[11,844628.25,332860.85],[12,577575.13,321859.78]]
-};
 
-// ---- Department data: annual + monthly ----
 const deptAnnual = [
-  ["Sales & Marketing", 2466000.00, 2678707.50],
-  ["General & Administrative", 1080000.00, 1206360.00],
-  ["Operations & Logistics", 1685400.00, 1715672.00],
-  ["Research & Development", 1502400.00, 1496244.00],
-  ["Customer Support", 879000.00, 791100.00]
+  ["Sales & Marketing",2466000,2678708],
+  ["Research & Development",1502400,1496244],
+  ["General & Administrative",1080000,1206360],
+  ["Operations & Logistics",1685400,1715672],
+  ["Customer Support",879000,791100]
 ];
-const deptMonthly = {
-  "Sales & Marketing": [[1,174500.0,177117.5],[2,179000.0,181685.0],[3,183500.0,186252.5],[4,188000.0,190820.0],[5,192500.0,195387.5],[6,197000.0,199955.0],[7,201500.0,204522.5],[8,206000.0,209090.0],[9,210500.0,213657.5],[10,240000.0,268800.0],[11,244500.0,322740.0],[12,249000.0,328680.0]],
-  "General & Administrative": [[1,90000.0,91620.0],[2,90000.0,93240.0],[3,90000.0,94860.0],[4,90000.0,96480.0],[5,90000.0,98100.0],[6,90000.0,99720.0],[7,90000.0,101340.0],[8,90000.0,102960.0],[9,90000.0,104580.0],[10,90000.0,106200.0],[11,90000.0,107820.0],[12,90000.0,109440.0]],
-  "Operations & Logistics": [[1,126800.0,119192.0],[2,128600.0,120884.0],[3,130400.0,122576.0],[4,132200.0,124268.0],[5,134000.0,125960.0],[6,135800.0,127652.0],[7,137600.0,129344.0],[8,139400.0,131036.0],[9,141200.0,132728.0],[10,158000.0,170640.0],[11,159800.0,204544.0],[12,161600.0,206848.0]],
-  "Research & Development": [[1,120800.0,121283.2],[2,121600.0,119776.0],[3,122400.0,122889.6],[4,123200.0,121352.0],[5,124000.0,127348.0],[6,124800.0,124924.8],[7,125600.0,126102.4],[8,126400.0,124377.6],[9,127200.0,126436.8],[10,128000.0,127360.0],[11,128800.0,126996.8],[12,129600.0,127396.8]],
-  "Customer Support": [[1,70500.0,63450.0],[2,71000.0,63900.0],[3,71500.0,64350.0],[4,72000.0,64800.0],[5,72500.0,65250.0],[6,73000.0,65700.0],[7,73500.0,66150.0],[8,74000.0,66600.0],[9,74500.0,67050.0],[10,75000.0,67500.0],[11,75500.0,67950.0],[12,76000.0,68400.0]]
-};
-const monthNames = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
 
-// ---- Conditional-formatting-style badge (discrete bands, not a gradient) ----
-// goodDirection: +1 means a positive variance% is favorable (revenue); -1 means
-// a negative variance% is favorable (cost/opex). Thresholds match the exact
-// FLAG / OVERSPEND / UNDERSPEND rules already used in the SQL queries and the
-// Excel conditional formatting (±10% for revenue, ±5% for OpEx) — same bar,
-// just rendered live here instead of baked into static cell fills.
-function varianceBadge(pct, goodDirection, threshold) {
-  const v = pct * goodDirection;
-  let bg = '#D6A24C', fg = '#0E1525';      // neutral / on-plan
-  if (v > threshold) { bg = '#6FBF8B'; }    // favorable
-  else if (v < -threshold) { bg = '#E0645A'; fg = '#F2EFE6'; } // unfavorable, flagged
-  return `<span class="variance-badge" style="background:${bg};color:${fg};">${fmtPct(pct)}</span>`;
+const regionMonthly = [
+  ["North America",1,254237,384674],["North America",2,227361,385229],["North America",3,621979,508445],
+  ["North America",4,584210,566673],["North America",5,431598,474567],["North America",6,441898,464869],
+  ["North America",7,606911,549184],["North America",8,499865,451719],["North America",9,443033,497852],
+  ["North America",10,631088,797951],["North America",11,707319,790688],["North America",12,852424,1222879],
+  ["Europe",1,288942,340784],["Europe",2,146509,346521],["Europe",3,346415,187050],
+  ["Europe",4,338988,323004],["Europe",5,561876,392063],["Europe",6,550678,180549],
+  ["Europe",7,549557,318939],["Europe",8,399133,395572],["Europe",9,399306,321323],
+  ["Europe",10,290937,399825],["Europe",11,667164,633655],["Europe",12,550919,709712],
+  ["Greater Asia",1,262269,122560],["Greater Asia",2,413053,133485],["Greater Asia",3,381272,118718],
+  ["Greater Asia",4,459789,344551],["Greater Asia",5,470872,263765],["Greater Asia",6,193908,397447],
+  ["Greater Asia",7,432698,194073],["Greater Asia",8,377297,252584],["Greater Asia",9,641355,211367],
+  ["Greater Asia",10,425748,403278],["Greater Asia",11,844628,332861],["Greater Asia",12,577575,321860],
+  ["APAC",1,261293,293074],["APAC",2,107863,192401],["APAC",3,184974,164870],
+  ["APAC",4,306779,88497],["APAC",5,205261,245857],["APAC",6,183482,176164],
+  ["APAC",7,240194,150714],["APAC",8,158140,134208],["APAC",9,191172,250567],
+  ["APAC",10,274541,219939],["APAC",11,281396,309874],["APAC",12,355355,347623],
+  ["Latin America",1,37696,122476],["Latin America",2,38132,115723],["Latin America",3,118646,92926],
+  ["Latin America",4,97969,41996],["Latin America",5,100832,70150],["Latin America",6,87669,55030],
+  ["Latin America",7,113782,160982],["Latin America",8,44117,186188],["Latin America",9,90359,88583],
+  ["Latin America",10,123634,107861],["Latin America",11,217404,172517],["Latin America",12,131016,193623]
+];
+
+const deptMonthly = [
+  ["Sales & Marketing",1,174500,177118],["Sales & Marketing",2,179000,181685],["Sales & Marketing",3,183500,186253],
+  ["Sales & Marketing",4,188000,190820],["Sales & Marketing",5,192500,195388],["Sales & Marketing",6,197000,199955],
+  ["Sales & Marketing",7,201500,204523],["Sales & Marketing",8,206000,209090],["Sales & Marketing",9,210500,213658],
+  ["Sales & Marketing",10,240000,268800],["Sales & Marketing",11,244500,322740],["Sales & Marketing",12,249000,328680],
+  ["Research & Development",1,120800,121283],["Research & Development",2,121600,119776],["Research & Development",3,122400,122890],
+  ["Research & Development",4,123200,121352],["Research & Development",5,124000,127348],["Research & Development",6,124800,124925],
+  ["Research & Development",7,125600,126102],["Research & Development",8,126400,124378],["Research & Development",9,127200,126437],
+  ["Research & Development",10,128000,127360],["Research & Development",11,128800,126997],["Research & Development",12,129600,127397],
+  ["General & Administrative",1,90000,91620],["General & Administrative",2,90000,93240],["General & Administrative",3,90000,94860],
+  ["General & Administrative",4,90000,96480],["General & Administrative",5,90000,98100],["General & Administrative",6,90000,99720],
+  ["General & Administrative",7,90000,101340],["General & Administrative",8,90000,102960],["General & Administrative",9,90000,104580],
+  ["General & Administrative",10,90000,106200],["General & Administrative",11,90000,107820],["General & Administrative",12,90000,109440],
+  ["Operations & Logistics",1,126800,119192],["Operations & Logistics",2,128600,120884],["Operations & Logistics",3,130400,122576],
+  ["Operations & Logistics",4,132200,124268],["Operations & Logistics",5,134000,125960],["Operations & Logistics",6,135800,127652],
+  ["Operations & Logistics",7,137600,129344],["Operations & Logistics",8,139400,131036],["Operations & Logistics",9,141200,132728],
+  ["Operations & Logistics",10,158000,170640],["Operations & Logistics",11,159800,204544],["Operations & Logistics",12,161600,206848],
+  ["Customer Support",1,70500,63450],["Customer Support",2,71000,63900],["Customer Support",3,71500,64350],
+  ["Customer Support",4,72000,64800],["Customer Support",5,72500,65250],["Customer Support",6,73000,65700],
+  ["Customer Support",7,73500,66150],["Customer Support",8,74000,66600],["Customer Support",9,74500,67050],
+  ["Customer Support",10,75000,67500],["Customer Support",11,75500,67950],["Customer Support",12,76000,68400]
+];
+
+const fmtUSDShort = n => "$" + (n/1e6).toFixed(2) + "M";
+const monthAbbr = ["","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+function colorScale(pct, reverse, range) {
+  let t = Math.max(-1, Math.min(1, pct / range));
+  if (reverse) t = -t;
+  const red = [248,105,107], yellow = [255,235,132], green = [99,190,123];
+  let c1, c2, f;
+  if (t < 0) { c1 = red; c2 = yellow; f = t + 1; } else { c1 = yellow; c2 = green; f = t; }
+  const r = Math.round(c1[0] + (c2[0]-c1[0])*f);
+  const g = Math.round(c1[1] + (c2[1]-c1[1])*f);
+  const b = Math.round(c1[2] + (c2[2]-c1[2])*f);
+  return `rgb(${r},${g},${b})`;
 }
 
-// ---- Build region table with click-to-drill rows ----
-const regionBody = document.getElementById('regionTableBody');
-regionAnnual.forEach(([name,budget,actual], idx) => {
-  const variance = actual - budget;
-  const pct = variance / budget;
-  const rowId = `region-drill-${idx}`;
-  regionBody.innerHTML += `
-    <tr class="clickable-row" tabindex="0" role="button" aria-expanded="false" data-target="${rowId}" onclick="toggleDrill('${rowId}', this, 'region', '${name.replace(/'/g,"\\'")}')" onkeydown="if(event.key==='Enter')this.click();">
-      <td class="name-cell"><span class="chevron"></span>${name}</td>
-      <td class="num">${fmtUSD(budget)}</td>
-      <td class="num">${fmtUSD(actual)}</td>
-      <td class="num">${fmtUSD(variance)}</td>
-      <td>${varianceBadge(pct, 1, 0.10)}</td>
-    </tr>
-    <tr class="drill-row" id="${rowId}"><td colspan="5"><div class="drill-content"></div></td></tr>
-  `;
-});
-
-// ---- Build department table with click-to-drill rows ----
-const deptBody = document.getElementById('deptTableBody');
-deptAnnual.forEach(([name,budget,actual], idx) => {
-  const variance = actual - budget;
-  const pct = variance / budget;
-  const rowId = `dept-drill-${idx}`;
-  deptBody.innerHTML += `
-    <tr class="clickable-row" tabindex="0" role="button" aria-expanded="false" data-target="${rowId}" onclick="toggleDrill('${rowId}', this, 'dept', '${name.replace(/'/g,"\\'")}')" onkeydown="if(event.key==='Enter')this.click();">
-      <td class="name-cell"><span class="chevron"></span>${name}</td>
-      <td class="num">${fmtUSD(budget)}</td>
-      <td class="num">${fmtUSD(actual)}</td>
-      <td class="num">${fmtUSD(variance)}</td>
-      <td>${varianceBadge(pct, -1, 0.05)}</td>
-    </tr>
-    <tr class="drill-row" id="${rowId}"><td colspan="5"><div class="drill-content"></div></td></tr>
-  `;
-});
-
-const drillChartInstances = {};
-function toggleDrill(rowId, headerRow, kind, name) {
-  const drillRow = document.getElementById(rowId);
-  const isShowing = drillRow.classList.contains('show');
-  if (isShowing) {
-    drillRow.classList.remove('show');
-    headerRow.classList.remove('expanded');
-    headerRow.setAttribute('aria-expanded', 'false');
-    return;
+// Build the heatmap tables and exceptions list FIRST, independent of Chart.js,
+// for the same robustness reason as Project 2: a CDN hiccup on the chart
+// library should never take down the rest of the page.
+try {
+  function buildHeatmap(tableId, rowOrder, monthlyData, reverse, range) {
+    const table = document.getElementById(tableId);
+    let html = '<tr><th class="row-label-head">' + (reverse ? "Department" : "Region") + '</th>';
+    for (let m = 1; m <= 12; m++) html += `<th>${monthAbbr[m]}</th>`;
+    html += '</tr>';
+    rowOrder.forEach(name => {
+      html += `<tr><td class="row-label">${name}</td>`;
+      for (let m = 1; m <= 12; m++) {
+        const row = monthlyData.find(r => r[0] === name && r[1] === m);
+        if (!row) { html += '<td>—</td>'; continue; }
+        const pct = (row[3] - row[2]) / row[2];
+        const bg = colorScale(pct, reverse, range);
+        html += `<td style="background:${bg}">${(pct*100).toFixed(0)}%</td>`;
+      }
+      html += '</tr>';
+    });
+    table.innerHTML = html;
   }
-  drillRow.classList.add('show');
-  headerRow.classList.add('expanded');
-  headerRow.setAttribute('aria-expanded', 'true');
 
-  const content = drillRow.querySelector('.drill-content');
-  if (!content.dataset.built) {
-    content.dataset.built = '1';
-    const monthly = (kind === 'region' ? regionMonthly : deptMonthly)[name];
-    const goodDirection = kind === 'region' ? 1 : -1;
-    const threshold = kind === 'region' ? 0.10 : 0.05;
-    const canvasId = `${rowId}-canvas`;
-    let rowsHtml = monthly.map(([m,b,a]) => {
-      const v = a - b, p = v/b;
-      return `<tr><td class="name-cell">${monthNames[m-1]}</td><td class="num">${fmtUSD(b)}</td><td class="num">${fmtUSD(a)}</td><td>${varianceBadge(p, goodDirection, threshold)}</td></tr>`;
-    }).join('');
-    content.innerHTML = `
-      <div class="chart-wrap small"><canvas id="${canvasId}"></canvas></div>
-      <table class="mini-table">
-        <thead><tr><th>Month</th><th class="num">Budget</th><th class="num">Actual</th><th>Variance %</th></tr></thead>
-        <tbody>${rowsHtml}</tbody>
-      </table>
-    `;
-    if (window.Chart) {
-      drillChartInstances[canvasId] = new Chart(document.getElementById(canvasId), {
-        type: 'line',
-        data: {
-          labels: monthly.map(r => monthNames[r[0]-1]),
-          datasets: [
-            {label:'Budget', data: monthly.map(r=>r[1]), borderColor:'#566187', borderDash:[4,3], pointRadius:0, borderWidth:2, tension:0.25},
-            {label:'Actual', data: monthly.map(r=>r[2]), borderColor:'#D6A24C', backgroundColor:'rgba(214,162,76,0.08)', fill:true, pointRadius:0, borderWidth:2, tension:0.25}
-          ]
-        },
-        options: {
-          responsive:true, maintainAspectRatio:false,
-          plugins:{legend:{position:'top', align:'end', labels:{boxWidth:10, boxHeight:10, usePointStyle:true, font:{size:11}}}},
-          scales:{
-            x:{grid:{display:false}, ticks:{font:{size:10}}},
-            y:{ticks:{callback:v=>fmtUSDShort(v), font:{size:10}}, grid:{color:'#2A3554'}}
-          }
-        }
-      });
+  buildHeatmap('regionHeatmap', regionAnnual.map(r=>r[0]), regionMonthly, false, 0.5);
+  buildHeatmap('deptHeatmap', deptAnnual.map(d=>d[0]), deptMonthly, true, 0.3);
+
+  // Exceptions list: combine both monthly datasets, flag >10% (revenue) / >5% (opex... but
+  // for a unified "top 10 by severity" view we just rank by absolute variance % magnitude.
+  const exceptions = [];
+  regionMonthly.forEach(([name,month,b,a]) => {
+    exceptions.push(['Revenue', name, month, (a-b)/b]);
+  });
+  deptMonthly.forEach(([name,month,b,a]) => {
+    exceptions.push(['OpEx', name, month, (a-b)/b]);
+  });
+  exceptions.sort((x,y) => Math.abs(y[3]) - Math.abs(x[3]));
+  const exBody = document.getElementById('exceptionsBody');
+  exceptions.slice(0,10).forEach(([area,unit,month,pct]) => {
+    const cls = (area==='Revenue' ? pct<0 : pct>0) ? 'neg-strong' : 'pos-strong';
+    exBody.innerHTML += `<tr>
+      <td class="name-cell">${area}</td>
+      <td class="name-cell">${unit}</td>
+      <td>${monthAbbr[month]}</td>
+      <td class="num"><span class="${cls}">${(pct*100).toFixed(1)}%</span></td>
+    </tr>`;
+  });
+} catch (e) { console.error('Heatmap/exceptions render failed:', e); }
+
+// Charts — same defensive pattern as Project 2: a named function so it can be
+// called immediately (Chart.js loaded fine) or later via the jsDelivr fallback.
+window.renderMeridianCharts = function() {
+try {
+  Chart.defaults.font.family = "'Inter', sans-serif";
+  Chart.defaults.color = "#8C93A8";
+  Chart.defaults.borderColor = "#2A3554";
+
+  new Chart(document.getElementById('regionChart'), {
+    type:'bar',
+    data:{
+      labels: regionAnnual.map(r=>r[0]),
+      datasets:[
+        {label:'Budget', data:regionAnnual.map(r=>r[1]), backgroundColor:'#2A3554', borderRadius:3},
+        {label:'Actual', data:regionAnnual.map(r=>r[2]), backgroundColor:'#D6A24C', borderRadius:3}
+      ]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{legend:{position:'top', align:'end', labels:{boxWidth:10, boxHeight:10, usePointStyle:true}}},
+      scales:{x:{grid:{display:false}, ticks:{font:{size:10}}}, y:{ticks:{callback:v=>fmtUSDShort(v)}, grid:{color:'#1D2740'}}}
     }
-  }
+  });
+
+  new Chart(document.getElementById('deptChart'), {
+    type:'bar',
+    data:{
+      labels: deptAnnual.map(d=>d[0].replace(' & ','\\n& ')),
+      datasets:[
+        {label:'Budget', data:deptAnnual.map(d=>d[1]), backgroundColor:'#2A3554', borderRadius:3},
+        {label:'Actual', data:deptAnnual.map(d=>d[2]), backgroundColor:'#4FB8AC', borderRadius:3}
+      ]
+    },
+    options:{
+      responsive:true, maintainAspectRatio:false,
+      plugins:{legend:{position:'top', align:'end', labels:{boxWidth:10, boxHeight:10, usePointStyle:true}}},
+      scales:{x:{grid:{display:false}, ticks:{font:{size:9.5}}}, y:{ticks:{callback:v=>fmtUSDShort(v)}, grid:{color:'#1D2740'}}}
+    }
+  });
+} catch (e) {
+  console.error('Chart render failed:', e);
+  document.querySelectorAll('.chart-wrap').forEach(el => {
+    el.innerHTML = '<p style="color:#8C93A8;font-size:12.5px;padding-top:40px;text-align:center;">Chart failed to load — see the SQL/Excel exports in the repo for the same data.</p>';
+  });
 }
-
-// ---- Overview bar charts (Budget vs Actual, annual) ----
-window.renderOverviewCharts = function() {
-  try {
-    Chart.defaults.font.family = "'Inter', sans-serif";
-    Chart.defaults.color = "#8C93A8";
-    Chart.defaults.borderColor = "#2A3554";
-
-    new Chart(document.getElementById('regionOverviewChart'), {
-      type:'bar',
-      data:{
-        labels: regionAnnual.map(r=>r[0]),
-        datasets:[
-          {label:'Budget', data: regionAnnual.map(r=>r[1]), backgroundColor:'#566187', borderRadius:3},
-          {label:'Actual', data: regionAnnual.map(r=>r[2]), backgroundColor:'#D6A24C', borderRadius:3}
-        ]
-      },
-      options:{
-        responsive:true, maintainAspectRatio:false,
-        plugins:{legend:{position:'top', align:'end', labels:{boxWidth:10, boxHeight:10, usePointStyle:true}}},
-        scales:{x:{grid:{display:false}}, y:{ticks:{callback:v=>fmtUSDShort(v)}, grid:{color:'#1D2740'}}}
-      }
-    });
-
-    new Chart(document.getElementById('deptOverviewChart'), {
-      type:'bar',
-      data:{
-        labels: deptAnnual.map(r=>r[0]),
-        datasets:[
-          {label:'Budget', data: deptAnnual.map(r=>r[1]), backgroundColor:'#566187', borderRadius:3},
-          {label:'Actual', data: deptAnnual.map(r=>r[2]), backgroundColor:'#D6A24C', borderRadius:3}
-        ]
-      },
-      options:{
-        responsive:true, maintainAspectRatio:false,
-        plugins:{legend:{position:'top', align:'end', labels:{boxWidth:10, boxHeight:10, usePointStyle:true}}},
-        scales:{x:{grid:{display:false}, ticks:{font:{size:10.5}}}, y:{ticks:{callback:v=>fmtUSDShort(v)}, grid:{color:'#1D2740'}}}
-      }
-    });
-  } catch (e) {
-    console.error('Overview chart render failed:', e);
-    document.querySelectorAll('.chart-wrap').forEach(el => {
-      el.innerHTML = '<p style="color:#8C93A8;font-size:12.5px;padding-top:30px;text-align:center;">Chart failed to load — see the SQL/Excel exports in the repo for the same data.</p>';
-    });
-  }
 };
-if (window.Chart) { window.renderOverviewCharts(); }
+
+if (window.Chart) { window.renderMeridianCharts(); }
 </script>
 
 </body>

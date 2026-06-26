@@ -10,9 +10,10 @@ flagging and drill-downs.
 
 ## See it live
 
-**[→ Open the interactive dashboard](https://karisfang.github.io/fpa-portfolio-variance-dashboard/)** — click
-any region or department row to drill into its monthly budget-vs-actual detail, no Power BI needed. Hosted
-free on GitHub Pages from `docs/index.html`.
+**[→ Open the interactive dashboard](https://karisfang.github.io/fpa-portfolio-variance-dashboard/)** — no Power BI
+account or download needed, just a browser. The two heatmap grids (region × month, department × month) use the
+exact same red/yellow/green logic as the Excel conditional formatting, just rendered natively in HTML/CSS.
+Hosted free on GitHub Pages from `docs/index.html`.
 
 ## The headline finding
 
@@ -40,7 +41,7 @@ check, visible immediately in a YTD trend.
 | `database/` | Extends the Project 2 SQLite database with `budget_revenue`, `dim_department`, `budget_opex`, `actual_opex` tables |
 | `sql/variance_queries.sql` | 6 queries: regional/department variance (annual + monthly drill-down), automatic exception flagging, a combined revenue+OpEx "how are we doing this month" view, and a single exceptions-only report |
 | `excel/Variance_Dashboard.xlsx` | KPI cards, budget-vs-actual bar charts, and two full variance grids with **live conditional formatting** (3-color scales + rule-based red/green flagging) |
-| `docs/index.html` | A standalone interactive dashboard (Chart.js, click-to-drill-down by region/department, threshold-based conditional-formatting badges), hosted free on GitHub Pages |
+| `docs/index.html` | A standalone interactive dashboard (Chart.js budget-vs-actual bars + two HTML/CSS conditional-formatting heatmap grids, region×month and department×month), hosted free on GitHub Pages |
 | `powerbi/POWER_BI_BUILD_GUIDE.md` | DAX variance measures, conditional-formatting rules, and step-by-step **drill-through** setup (Power BI's actual answer to "drill down by region/department") |
 | `architecture/architecture_diagram.svg` | Pipeline architecture |
 | `docs/VARIANCE_METHODOLOGY.md` | How the budget was built, a real SQL fan-out bug hit during development (and the fix), and an honest discussion of where a single variance threshold creates false-positive noise |
