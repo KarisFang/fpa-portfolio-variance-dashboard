@@ -73,6 +73,8 @@ sqlite3 variance.db < 04_budget_seed_data.sql
 cd ../excel
 python3 build_variance_dashboard.py   # only Python use: writing the .xlsx file, not the analysis
 ```
-
+## Contributors
+- [@KarisFang](https://github.com/KarisFang) — Analysis & SQL
+- [Claude](https://claude.ai) (Anthropic) — Code generation & dashboard
 ---
 Built by Karis Fang as a portfolio project. 
